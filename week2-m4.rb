@@ -7,3 +7,9 @@ def rgb(str)
       end
 end
 rgb("yelow")
+
+def saved_sqrt(a, b)
+c = (a*b)>0?Math.sqrt(a*b):0
+puts c
+end
+saved_sqrt(100,0)
