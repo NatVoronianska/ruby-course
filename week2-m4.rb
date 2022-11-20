@@ -27,8 +27,10 @@ workday("пн")
 
 def parity() 
   print("Enter integer number")
-  number = gets.strip.to_i
-  number%2 > 0 ? puts("#{number} is even"):puts("#{number} is odd")
+  number=gets.strip.to_i
+  puts("\n#{number} is odd") unless (number%2==0)
+  puts("\n#{number} is even") if (number%2==0)
+  #number%2 > 0 ? puts("\n #{number} is odd"):puts("#{number} is even")
 end
 
 parity()
