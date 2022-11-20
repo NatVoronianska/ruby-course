@@ -13,3 +13,14 @@ c = (a*b)>0?Math.sqrt(a*b):0
 puts c
 end
 saved_sqrt(100,0)
+
+def workday(today)
+    case today
+    when "пн", "вівт", "сер", "чт", "пт" 
+    puts("#{today} - будній день")
+    when "суб", "нед" 
+     puts ("#{today} - вихідний день")
+    else puts ("#{today} - точно день тижня? Можна вводити тільки значення пн, вівт, сер, чт, пт, суб, нед")
+    end
+end
+workday("пн")
