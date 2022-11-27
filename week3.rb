@@ -7,7 +7,7 @@ prise = gets.strip.to_f
  weigth = gets.strip.to_f
  puts(prise*weigth)
 end
-=end
+
 counter = 0
 divider = 21
 loop do
@@ -28,3 +28,15 @@ loop do
       end
       
 end
+
+def my_metod(a)
+      return a * 2 if a==5
+      return a * 3 if a == 10
+      0
+end
+puts (my_metod(20))
+=end
+def print_welcome(name)
+print ("Hello, #{name}")
+end
+print_welcome("nat")
