@@ -118,16 +118,19 @@ print re.match?("Some– World")
 =end
 class Pizza
  @@count = 0
+ @@failinstance = 0
   def initialize(d,ingredients)
-     @@count+=1
+        @@count+=1
+
      @number = @@count
      @ingredients = ingredients
      if d == 25 || d == 50 then
       @d = d
      else @d = 0
       @number = 0
-      @@count = @@count -1
       @ingredients = ""
+      @@count-=1
+      @@failinstance += 1
      end
   end
   def description
@@ -137,8 +140,13 @@ class Pizza
       print("Піца № #{@number} (діагональ = #{@d}) містить [#{@ingredients}].")
     end
   end
+  def self.failInstance
+   @@failinstance
+  end
+  
 end
-pizza1 = Pizza.new(10,['mushroom', 'cheese'])
-pizza2 = Pizza.new(25,['mushroom', 'cheese', 'cherry'])
-pizza1.description 
-pizza2.description 
+pizza1 = Pizza.new(24, ['mushroom', 'cheese'])
+pizza2 = Pizza.new(25, ['mushroom', 'cheese', 'cherry'])
+pizza3 = Pizza.new(20, ['mushroom', 'cheese'])
+pizza4 = Pizza.new(21, ['mushroom', 'cheese', 'cherry'])
+puts Pizza.failInstance
