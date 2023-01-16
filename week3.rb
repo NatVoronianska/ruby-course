@@ -286,7 +286,30 @@ end
 sqrt(4) => 2.0
 sqrt(5) => 2.2361
 sqrt(-3) => виключення StandardError з повідомленням "The root of a negative number does not exist in rational numbers"
-
+def third_order(num)
+ if num==1||num==0 
+  n=1
+ else 
+  n = rand(num+1)
+ end 
+ third = n**3
+ count = 0
+ begin
+  count+=1
+  puts("What is result #{n} * #{n} * #{n}?")
+  int = gets.strip.to_i
+  if third == int 
+    puts ('Good job')
+    return
+  end
+  raise
+  rescue 
+  if count<3 
+   retry
+  else puts'Try next time' 
+  end
+ end
+end
 class PhoneFormatException < StandardError
   def initialize(user_phone = nil)
     @ph = user_phone
@@ -321,32 +344,49 @@ class User
   end
 end
 
-
-  user = User.new('Name')
-  user.phone = '806787655678888'
-  puts method(:phone_valid?).bind(self).call('+380876756543') 
-=end
-def third_order(num)
- if num==1||num==0 
-  n=1
- else 
-  n = rand(num+1)
- end 
- third = n**3
- count = 0
- begin
-  count+=1
-  puts("What is result #{n} * #{n} * #{n}?")
-  int = gets.strip.to_i
-  if third == int 
-    puts ('Good job')
-    return
+#recursion
+def fib(num)
+  if num < 2
+    num
+  else
+    fib(num-1) + fib(num-2)
   end
-  raise
-  rescue 
-  if count<3 
-   retry
-  else puts'Try next time' 
-  end
- end
 end
+puts fib(4)
+=end
+class PhoneFormatException < StandardError
+  def initialize(phone)
+    @ph = phone
+  end
+
+  def to_s
+    "Phone number #{@ph} is incorrect. You should enter phone in format +38dddddddddd"
+  end
+end
+
+  module Validation 
+    def phone_valid(phone)
+      phone.match?(/\+38\d{10}/)
+
+    end
+  end  
+
+class User
+  include Validation 
+  attr_accessor :name
+  attr_writer :phone
+  
+  def initialize(name)
+    @name = name
+  end  
+  def phone=(phone)
+    if phone_valid(phone) 
+      @phone = phone
+    else  
+      raise PhoneFormatException.new(phone) 
+    end
+  end
+end
+
+user = User.new('Name')
+user.phone = '+380678765567'
